@@ -46,11 +46,10 @@ mvn spring-boot:run
 
 ## Deploy no Render
 1. Crie um novo Web Service no Render apontando para este repositório.
-2. Use os comandos:
-	 - Build: `mvn clean package`
-	 - Start: `java -jar target/java-mvc-thymeleaf-0.0.1-SNAPSHOT.jar`
-3. Configure as variáveis de ambiente do Neon listadas acima.
-4. O Render fornece automaticamente a variável `PORT`, que já está suportada pela aplicação.
+2. Escolha a opção Docker.
+3. O Render vai usar o Dockerfile na raiz do projeto automaticamente.
+4. Configure a variável de ambiente `POSTGRES_URL`.
+5. O Render fornece automaticamente a variável `PORT`, que já está suportada pela aplicação.
 
 ## Entidade Proposta
 - `id_proposta` (int)
