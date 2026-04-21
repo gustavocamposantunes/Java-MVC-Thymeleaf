@@ -36,8 +36,9 @@
                 <td class="p-4" th:text="${proposta.titulo}">Título</td>
                 <td class="p-4" th:text="${proposta.dataSubmissao}">2026-04-21</td>
                 <td class="p-4">
-                    <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold bg-slate-200 text-slate-800"
-                          th:text="${proposta.status}">status</span>
+                      <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold"
+                          th:classappend="${proposta.status == 'aprovado'} ? ' bg-green-100 text-green-700' : (${proposta.status == 'aguardando aprovação'} ? ' bg-yellow-100 text-yellow-700' : ' bg-red-100 text-red-700')"
+                          th:text="${proposta.status == 'reijeitado' ? 'rejeitado' : proposta.status}">status</span>
                 </td>
                 <td class="p-4">
                     <a th:if="${proposta.anexos != null}" th:href="@{|/propostas/${proposta.idProposta}/anexo|}"

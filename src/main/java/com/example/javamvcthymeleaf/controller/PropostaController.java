@@ -30,7 +30,7 @@ public class PropostaController {
     private static final List<String> STATUS_OPTIONS = Arrays.asList(
             "aprovado",
             "aguardando aprovação",
-            "reijeitado"
+            "rejeitado"
     );
 
     private final PropostaService propostaService;
