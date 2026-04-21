@@ -44,19 +44,40 @@ public class DataSourceConfig {
             return H2_URL;
         }
 
-        if (rawUrl.startsWith("jdbc:")) {
+        String normalizedUrl = stripJdbcPrefix(rawUrl);
+        URI uri = parseUri(normalizedUrl);
+
+        if (uri == null) {
+            return rawUrl.startsWith("jdbc:") ? rawUrl : "jdbc:" + rawUrl;
+        }
+
+        if (!isPostgresScheme(uri.getScheme())) {
             return rawUrl;
         }
 
-        if (rawUrl.startsWith("postgresql://") || rawUrl.startsWith("postgres://")) {
-            return "jdbc:" + rawUrl;
+        StringBuilder jdbcUrl = new StringBuilder("jdbc:postgresql://");
+
+        if (uri.getHost() != null) {
+            jdbcUrl.append(uri.getHost());
         }
 
-        return rawUrl;
+        if (uri.getPort() != -1) {
+            jdbcUrl.append(":").append(uri.getPort());
+        }
+
+        if (uri.getRawPath() != null) {
+            jdbcUrl.append(uri.getRawPath());
+        }
+
+        if (uri.getRawQuery() != null) {
+            jdbcUrl.append("?").append(uri.getRawQuery());
+        }
+
+        return jdbcUrl.toString();
     }
 
     private String extractUser(String rawUrl) {
-        URI uri = parseUri(rawUrl);
+        URI uri = parseUri(stripJdbcPrefix(rawUrl));
         if (uri == null || uri.getUserInfo() == null || uri.getUserInfo().isBlank()) {
             return null;
         }
@@ -70,7 +91,7 @@ public class DataSourceConfig {
     }
 
     private String extractPassword(String rawUrl) {
-        URI uri = parseUri(rawUrl);
+        URI uri = parseUri(stripJdbcPrefix(rawUrl));
         if (uri == null || uri.getUserInfo() == null || uri.getUserInfo().isBlank()) {
             return null;
         }
@@ -93,6 +114,18 @@ public class DataSourceConfig {
         } catch (URISyntaxException ex) {
             return null;
         }
+    }
+
+    private String stripJdbcPrefix(String rawUrl) {
+        if (rawUrl == null) {
+            return null;
+        }
+
+        return rawUrl.startsWith("jdbc:") ? rawUrl.substring(5) : rawUrl;
+    }
+
+    private boolean isPostgresScheme(String scheme) {
+        return "postgresql".equalsIgnoreCase(scheme) || "postgres".equalsIgnoreCase(scheme);
     }
 
     private boolean isH2(String jdbcUrl) {
