@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propostas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen">
+<div class="max-w-6xl mx-auto py-10 px-4">
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-3xl font-bold text-slate-800">CRUD de Propostas</h1>
+        <a th:href="@{/propostas/nova}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow">
+            Nova proposta
+        </a>
+    </div>
+
+    <div class="bg-white rounded-xl shadow overflow-hidden">
+        <table class="w-full">
+            <thead class="bg-slate-50">
+            <tr class="text-left text-slate-600 text-sm uppercase tracking-wider">
+                <th class="p-4">ID</th>
+                <th class="p-4">Título</th>
+                <th class="p-4">Data submissão</th>
+                <th class="p-4">Status</th>
+                <th class="p-4">Anexo</th>
+                <th class="p-4">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(propostas)}">
+                <td colspan="6" class="p-6 text-center text-slate-500">Nenhuma proposta cadastrada.</td>
+            </tr>
+            <tr th:each="proposta : ${propostas}" class="border-t border-slate-100 hover:bg-slate-50">
+                <td class="p-4 font-medium" th:text="${proposta.idProposta}">1</td>
+                <td class="p-4" th:text="${proposta.titulo}">Título</td>
+                <td class="p-4" th:text="${proposta.dataSubmissao}">2026-04-21</td>
+                <td class="p-4">
+                    <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold bg-slate-200 text-slate-800"
+                          th:text="${proposta.status}">status</span>
+                </td>
+                <td class="p-4">
+                    <a th:if="${proposta.anexos != null}" th:href="@{|/propostas/${proposta.idProposta}/anexo|}"
+                       class="text-blue-600 hover:underline">Baixar</a>
+                    <span th:if="${proposta.anexos == null}" class="text-slate-400">Sem anexo</span>
+                </td>
+                <td class="p-4">
+                    <div class="flex items-center gap-2">
+                        <a th:href="@{|/propostas/${proposta.idProposta}/editar|}"
+                           class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded">Editar</a>
+                        <form th:action="@{|/propostas/${proposta.idProposta}/excluir|}" method="post"
+                              onsubmit="return confirm('Deseja realmente excluir?')">
+                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded">Excluir</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

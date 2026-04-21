@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${modoEdicao} ? 'Editar proposta' : 'Nova proposta'">Form proposta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen">
+<div class="max-w-3xl mx-auto py-10 px-4">
+    <div class="bg-white rounded-xl shadow p-6">
+        <h1 class="text-2xl font-bold mb-6 text-slate-800" th:text="${modoEdicao} ? 'Editar proposta' : 'Nova proposta'">Nova proposta</h1>
+
+        <form th:object="${propostaForm}"
+              th:action="${modoEdicao} ? @{|/propostas/${propostaForm.idProposta}|} : @{/propostas}"
+              method="post"
+              enctype="multipart/form-data"
+              class="space-y-4">
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Título</label>
+                <input type="text" th:field="*{titulo}" class="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <p class="text-red-600 text-sm mt-1" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></p>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Descrição</label>
+                <textarea th:field="*{descricao}" rows="5" class="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                <p class="text-red-600 text-sm mt-1" th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></p>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Data de submissão</label>
+                <input type="date" th:field="*{dataSubmissao}" class="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <p class="text-red-600 text-sm mt-1" th:if="${#fields.hasErrors('dataSubmissao')}" th:errors="*{dataSubmissao}"></p>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Status</label>
+                <select th:field="*{status}" class="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Selecione...</option>
+                    <option th:each="opt : ${statusOptions}" th:value="${opt}" th:text="${opt}"></option>
+                </select>
+                <p class="text-red-600 text-sm mt-1" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></p>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Anexo</label>
+                <input type="file" th:field="*{anexo}" class="w-full border border-slate-300 rounded-lg px-3 py-2 bg-white">
+                <p class="text-xs text-slate-500 mt-1">No modo edição, se não enviar arquivo, o anexo atual será mantido.</p>
+            </div>
+
+            <div class="flex items-center gap-3 pt-2">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                    Salvar
+                </button>
+                <a th:href="@{/propostas}" class="bg-slate-200 hover:bg-slate-300 text-slate-800 px-4 py-2 rounded-lg">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

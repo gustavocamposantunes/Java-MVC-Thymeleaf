@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java MVC Thymeleaf</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-slate-100 flex items-center justify-center p-6">
+<div class="bg-white p-8 rounded-xl shadow max-w-lg w-full text-center">
+    <h1 class="text-2xl font-bold text-slate-800 mb-3">Projeto Java MVC Thymeleaf</h1>
+    <p class="text-slate-600 mb-6">Acesse o CRUD de propostas.</p>
+    <a th:href="@{/propostas}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg">Abrir propostas</a>
+</div>
+</body>
+</html>
