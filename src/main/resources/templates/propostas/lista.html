@@ -9,7 +9,10 @@
 <body class="bg-slate-100 min-h-screen">
 <div class="max-w-6xl mx-auto py-10 px-4">
     <div class="flex items-center justify-between mb-6">
-        <h1 class="text-3xl font-bold text-slate-800">CRUD de Propostas</h1>
+        <div>
+            <h1 class="text-3xl font-bold text-slate-800">CRUD de Propostas</h1>
+            <a th:href="@{/}" class="text-sm text-slate-500 hover:text-slate-900">Voltar para home</a>
+        </div>
         <a th:href="@{/propostas/nova}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow">
             Nova proposta
         </a>
