@@ -7,123 +7,51 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <style>
-        body {
-            min-height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e2e8f0 100%);
-        }
-
-        .page-wrap {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-        }
-
-        .hero-card {
-            width: 100%;
-            max-width: 980px;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .hero-header {
-            background: #1f2937;
-            color: #fff;
-            padding: 40px 32px;
-            text-align: center;
-        }
-
-        .hero-header h1,
-        .hero-header p {
-            margin: 0;
-        }
-
-        .hero-header h1 {
-            margin-top: 8px;
-            font-size: 2.2rem;
-            font-weight: 700;
-        }
-
-        .hero-header p {
-            color: rgba(255, 255, 255, 0.78);
-            margin-top: 12px;
-            font-size: 1rem;
-        }
-
-        .module-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-            padding: 28px;
-            background: #fff;
-        }
-
-        .module-card {
-            border-radius: 16px;
-            min-height: 190px;
-        }
-
-        .module-card .mdl-card__supporting-text {
-            width: auto;
-            color: rgba(0, 0, 0, 0.72);
-            font-size: 1rem;
-        }
-
-        .module-card .mdl-card__title-text {
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-
-        .module-card .action-row {
-            margin-top: auto;
-            padding: 0 16px 16px;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+    <script defer th:src="@{/js/app.js}"></script>
 </head>
-<body>
-<div class="page-wrap">
-    <div class="mdl-card mdl-shadow--8dp hero-card">
-        <div class="hero-header">
-            <div class="mdl-typography--caption" style="letter-spacing: .25em; text-transform: uppercase;">Sistema acadêmico</div>
-            <h1>Java MVC Thymeleaf</h1>
-            <p>Selecione abaixo qual módulo deseja acessar.</p>
-        </div>
-
-        <div class="module-grid">
-            <div class="mdl-card mdl-shadow--4dp module-card">
-                <div class="mdl-card__title">
-                    <h2 class="mdl-card__title-text">Propostas</h2>
+<body data-page="home">
+<div class="app-shell">
+    <main class="app-container">
+        <section class="app-card">
+            <div class="app-card__header">
+                <div class="app-breadcrumb">
+                    <i class="material-icons">dashboard</i>
+                    Sistema acadêmico
                 </div>
-                <div class="mdl-card__supporting-text">
-                    Acesse o CRUD de propostas com anexos e status.
-                </div>
-                <div class="action-row">
-                    <a th:href="@{/propostas}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-                        <i class="material-icons" style="margin-right: 8px;">description</i>
-                        Abrir propostas
-                    </a>
-                </div>
+                <h1 class="app-title">Java MVC Thymeleaf</h1>
+                <p class="app-subtitle">Selecione abaixo qual módulo deseja acessar. A interface está otimizada com Material Design Lite, ícones e microinterações leves em JavaScript.</p>
             </div>
 
-            <div class="mdl-card mdl-shadow--4dp module-card">
-                <div class="mdl-card__title">
-                    <h2 class="mdl-card__title-text">Cursos</h2>
-                </div>
-                <div class="mdl-card__supporting-text">
-                    Acesse o CRUD de cursos com nome e descrição.
-                </div>
-                <div class="action-row">
-                    <a th:href="@{/cursos}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                        <i class="material-icons" style="margin-right: 8px;">school</i>
-                        Abrir cursos
-                    </a>
-                </div>
+            <div class="hero-grid">
+                <a th:href="@{/propostas}" class="mdl-card mdl-shadow--2dp hero-tile hero-tile-link">
+                    <div class="hero-tile__content">
+                        <div class="hero-tile__icon" style="background: linear-gradient(135deg, #3f51b5, #5c6bc0);">
+                            <i class="material-icons">description</i>
+                        </div>
+                        <h2 class="hero-tile__title">Propostas</h2>
+                        <p class="hero-tile__text">Acesse o CRUD de propostas com anexos, status e feedback visual mais limpo.</p>
+                        <span class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                            Abrir propostas
+                        </span>
+                    </div>
+                </a>
+
+                <a th:href="@{/cursos}" class="mdl-card mdl-shadow--2dp hero-tile hero-tile-link">
+                    <div class="hero-tile__content">
+                        <div class="hero-tile__icon" style="background: linear-gradient(135deg, #ff4081, #ff6ea8);">
+                            <i class="material-icons">school</i>
+                        </div>
+                        <h2 class="hero-tile__title">Cursos</h2>
+                        <p class="hero-tile__text">Acesse o CRUD de cursos com um layout responsivo, elegante e consistente.</p>
+                        <span class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                            Abrir cursos
+                        </span>
+                    </div>
+                </a>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 </div>
 </body>
 </html>
