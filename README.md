@@ -1,6 +1,6 @@
 # Java MVC Thymeleaf
 
-Projeto Spring Boot MVC com CRUD de propostas usando Thymeleaf.
+Projeto Spring Boot MVC com CRUD de propostas e cursos usando Thymeleaf.
 
 ## Requisitos
 - Java 11+
@@ -43,7 +43,8 @@ mvn spring-boot:run
 
 ## URLs locais
 - Aplicação: http://localhost:8080
-- CRUD: http://localhost:8080/propostas
+- CRUD Propostas: http://localhost:8080/propostas
+- CRUD Cursos: http://localhost:8080/cursos
 - H2 Console: http://localhost:8080/h2-console
 	- JDBC URL: `jdbc:h2:mem:propostasdb`
 	- User: `sa`
@@ -63,3 +64,8 @@ mvn spring-boot:run
 - `data_submissao` (date)
 - `status` (`aprovado`, `aguardando aprovação`, `reijeitado`)
 - `anexos` (blob)
+
+## Entidade Curso
+- `id_curso` (int)
+- `nome` (string)
+- `descricao` (string)
