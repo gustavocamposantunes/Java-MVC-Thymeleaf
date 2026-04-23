@@ -23,10 +23,10 @@
             <p class="app-subtitle">Gerencie títulos, status, datas e anexos com uma visualização mais agradável.</p>
         </div>
         <div class="actions">
-            <a th:href="@{/}" class="mdl-button mdl-js-button mdl-button--icon" aria-label="Voltar para home">
+            <a th:href="@{/}" class="mdl-button mdl-js-button mdl-button--icon btn--slate" aria-label="Voltar para home">
                 <i class="material-icons">home</i>
             </a>
-            <a th:href="@{/propostas/nova}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+            <a th:href="@{/propostas/nova}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect btn--blue">
                 <i class="material-icons" style="margin-right: 8px;">add</i>
                 Nova proposta
             </a>
@@ -74,19 +74,19 @@
                               th:text="${proposta.status}">status</span>
                     </td>
                     <td class="mdl-data-table__cell--non-numeric">
-                        <a th:if="${proposta.anexos != null}" th:href="@{|/propostas/${proposta.idProposta}/anexo|}" class="mdl-button mdl-js-button mdl-button--icon" aria-label="Baixar anexo">
+                        <a th:if="${proposta.anexos != null}" th:href="@{|/propostas/${proposta.idProposta}/anexo|}" class="mdl-button mdl-js-button mdl-button--icon btn--blue" aria-label="Baixar anexo">
                             <i class="material-icons">attach_file</i>
                         </a>
                         <span th:if="${proposta.anexos == null}" style="color: rgba(0, 0, 0, 0.45);">Sem anexo</span>
                     </td>
                     <td class="mdl-data-table__cell--non-numeric">
                         <div class="actions-cell">
-                            <a th:href="@{|/propostas/${proposta.idProposta}/editar|}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                            <a th:href="@{|/propostas/${proposta.idProposta}/editar|}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect btn--orange">
                                 <i class="material-icons" style="margin-right: 8px;">edit</i>
                                 Editar
                             </a>
                             <form th:action="@{|/propostas/${proposta.idProposta}/excluir|}" method="post" data-confirm="Deseja realmente excluir esta proposta?" style="display: inline;">
-                                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect btn--red">
                                     <i class="material-icons" style="margin-right: 8px;">delete</i>
                                     Excluir
                                 </button>

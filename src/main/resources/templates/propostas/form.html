@@ -22,12 +22,17 @@
                 <h1 class="app-title" th:text="${modoEdicao} ? 'Editar proposta' : 'Nova proposta'">Nova proposta</h1>
                 <p class="app-subtitle">Cadastre uma proposta com título, descrição, status, data e anexo.</p>
             </div>
-            <a th:href="@{/propostas}" class="mdl-button mdl-js-button mdl-button--icon" aria-label="Voltar">
+            <a th:href="@{/propostas}" class="mdl-button mdl-js-button mdl-button--icon btn--slate" aria-label="Voltar">
                 <i class="material-icons">arrow_back</i>
             </a>
         </div>
 
         <section class="app-card form-card">
+            <div class="form-card__header">
+                <div class="form-card__eyebrow">Cadastro de proposta</div>
+                <h2 class="form-card__title" th:text="${modoEdicao} ? 'Atualize a proposta' : 'Crie uma nova proposta'">Crie uma nova proposta</h2>
+                <p class="form-card__subtitle">Preencha os dados principais, escolha um status e, se necessário, envie um anexo complementar.</p>
+            </div>
             <div class="app-card__body">
                 <div th:if="${mensagemErro}" class="alert alert--danger" data-auto-dismiss>
                     <i class="material-icons">error</i>
@@ -40,52 +45,64 @@
                       enctype="multipart/form-data"
                       data-submit-loading>
 
-                    <div class="form-grid">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
-                            <input class="mdl-textfield__input" type="text" id="titulo" th:field="*{titulo}">
-                            <label class="mdl-textfield__label" for="titulo">Título</label>
-                            <span class="mdl-textfield__error" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></span>
-                        </div>
-
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
-                            <textarea class="mdl-textfield__input" id="descricao" rows="5" th:field="*{descricao}"></textarea>
-                            <label class="mdl-textfield__label" for="descricao">Descrição</label>
-                            <span class="mdl-textfield__error" th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></span>
-                        </div>
-
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
-                            <input class="mdl-textfield__input" type="date" id="dataSubmissao" th:field="*{dataSubmissao}">
-                            <label class="mdl-textfield__label" for="dataSubmissao">Data de submissão</label>
-                            <span class="mdl-textfield__error" th:if="${#fields.hasErrors('dataSubmissao')}" th:errors="*{dataSubmissao}"></span>
-                        </div>
-
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
-                            <select class="mdl-textfield__input" id="status" th:field="*{status}">
-                                <option value="">Selecione...</option>
-                                <option th:each="opt : ${statusOptions}" th:value="${opt}" th:text="${opt}"></option>
-                            </select>
-                            <label class="mdl-textfield__label" for="status">Status</label>
-                            <span class="mdl-textfield__error" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></span>
-                        </div>
-
-                        <div>
-                            <label class="mdl-typography--subtitle2" for="anexo">Anexo</label>
-                            <div class="file-line" style="margin-top: 10px;">
-                                <input type="file" id="anexo" th:field="*{anexo}" data-file-label>
-                                <span class="file-name" data-file-name-for="anexo">Nenhum arquivo selecionado</span>
+                    <div class="form-section">
+                        <div class="form-grid form-grid--proposal">
+                            <div class="form-field form-field--full">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text" id="titulo" th:field="*{titulo}">
+                                    <label class="mdl-textfield__label" for="titulo">Título</label>
+                                    <span class="mdl-textfield__error" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></span>
+                                </div>
                             </div>
-                            <p class="field-hint">No modo edição, se não enviar arquivo, o anexo atual será mantido.</p>
-                            <span class="mdl-textfield__error" th:if="${#fields.hasErrors('anexo')}" th:errors="*{anexo}"></span>
-                        </div>
 
-                        <div class="form-actions">
-                            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-                                <i class="material-icons" style="margin-right: 8px;">save</i>
-                                Salvar
-                            </button>
-                            <a th:href="@{/propostas}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                                Cancelar
-                            </a>
+                            <div class="form-field form-field--full">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <textarea class="mdl-textfield__input" id="descricao" rows="5" th:field="*{descricao}"></textarea>
+                                    <label class="mdl-textfield__label" for="descricao">Descrição</label>
+                                    <span class="mdl-textfield__error" th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-field form-field--half">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="date" id="dataSubmissao" th:field="*{dataSubmissao}">
+                                    <label class="mdl-textfield__label" for="dataSubmissao">Data de submissão</label>
+                                    <span class="mdl-textfield__error" th:if="${#fields.hasErrors('dataSubmissao')}" th:errors="*{dataSubmissao}"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-field form-field--half">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <select class="mdl-textfield__input" id="status" th:field="*{status}">
+                                        <option value="">Selecione...</option>
+                                        <option th:each="opt : ${statusOptions}" th:value="${opt}" th:text="${opt}"></option>
+                                    </select>
+                                    <label class="mdl-textfield__label" for="status">Status</label>
+                                    <span class="mdl-textfield__error" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-field form-field--full form-file-field">
+                                <label class="mdl-typography--subtitle2" for="anexo">Anexo</label>
+                                <div class="file-line">
+                                    <input type="file" id="anexo" th:field="*{anexo}" data-file-label>
+                                    <span class="file-name" data-file-name-for="anexo">Nenhum arquivo selecionado</span>
+                                </div>
+                                <p class="field-hint">No modo edição, se não enviar arquivo, o anexo atual será mantido.</p>
+                                <span class="mdl-textfield__error" th:if="${#fields.hasErrors('anexo')}" th:errors="*{anexo}"></span>
+                            </div>
+
+                            <div class="form-field form-field--full">
+                                <div class="form-actions">
+                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect btn--blue">
+                                        <i class="material-icons" style="margin-right: 8px;">save</i>
+                                        Salvar
+                                    </button>
+                                    <a th:href="@{/propostas}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect btn--orange">
+                                        Cancelar
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>

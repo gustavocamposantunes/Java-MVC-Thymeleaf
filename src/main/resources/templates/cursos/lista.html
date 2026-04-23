@@ -23,10 +23,10 @@
             <p class="app-subtitle">Gerencie os cursos cadastrados com uma interface mais limpa e responsiva.</p>
         </div>
         <div class="actions">
-            <a th:href="@{/}" class="mdl-button mdl-js-button mdl-button--icon" aria-label="Voltar para home">
+            <a th:href="@{/}" class="mdl-button mdl-js-button mdl-button--icon btn--slate" aria-label="Voltar para home">
                 <i class="material-icons">home</i>
             </a>
-            <a th:href="@{/cursos/novo}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+            <a th:href="@{/cursos/novo}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect btn--blue">
                 <i class="material-icons" style="margin-right: 8px;">add</i>
                 Novo curso
             </a>
@@ -68,12 +68,12 @@
                     <td class="mdl-data-table__cell--non-numeric" th:text="${curso.descricao}">Descrição</td>
                     <td class="mdl-data-table__cell--non-numeric">
                         <div class="actions-cell">
-                            <a th:href="@{|/cursos/${curso.idCurso}/editar|}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                            <a th:href="@{|/cursos/${curso.idCurso}/editar|}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect btn--orange">
                                 <i class="material-icons" style="margin-right: 8px;">edit</i>
                                 Editar
                             </a>
                             <form th:action="@{|/cursos/${curso.idCurso}/excluir|}" method="post" data-confirm="Deseja realmente excluir este curso?" style="display: inline;">
-                                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect btn--red">
                                     <i class="material-icons" style="margin-right: 8px;">delete</i>
                                     Excluir
                                 </button>

@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
 :root {
+    font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --app-bg: #eef2ff;
     --app-bg-alt: #f8fafc;
     --app-surface: rgba(255, 255, 255, 0.92);
@@ -15,6 +18,8 @@
     --app-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
 html, body {
     min-height: 100%;
 }
@@ -22,10 +27,34 @@ html, body {
 body {
     margin: 0;
     color: var(--app-text);
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 1.5;
     background:
         radial-gradient(circle at top left, rgba(63, 81, 181, 0.18), transparent 30%),
         radial-gradient(circle at top right, rgba(255, 64, 129, 0.10), transparent 26%),
         linear-gradient(180deg, var(--app-bg) 0%, #f8fafc 100%);
+}
+
+a {
+    color: var(--app-primary-dark);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+    transition: color .2s ease, opacity .2s ease, transform .2s ease;
+}
+
+a:hover {
+    color: var(--app-primary);
+}
+
+a:focus-visible,
+button:focus-visible,
+.mdl-button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid rgba(63, 81, 181, 0.28);
+    outline-offset: 3px;
 }
 
 body[data-page="home"] {
@@ -101,6 +130,148 @@ body[data-page="form"] {
     box-shadow: var(--app-shadow);
     border-radius: 24px;
     overflow: hidden;
+}
+
+.mdl-button {
+    font-family: inherit;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0;
+    border-radius: 999px;
+    padding: 0 22px;
+    text-decoration: none;
+    transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, color .18s ease, border-color .18s ease, opacity .18s ease;
+}
+
+.mdl-button.mdl-button--icon {
+    padding: 0;
+}
+
+.mdl-button .material-icons:first-child {
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+.mdl-button--raised {
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
+}
+
+.mdl-button--raised:hover,
+.mdl-button--raised:focus-visible {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px rgba(15, 23, 42, 0.16);
+}
+
+.mdl-button--colored,
+.mdl-button--accent {
+    color: #fff;
+}
+
+.btn--blue,
+.mdl-button--colored {
+    background: #2563eb;
+    color: #fff;
+}
+
+.btn--blue:hover,
+.btn--blue:focus-visible,
+.mdl-button--colored:hover,
+.mdl-button--colored:focus-visible {
+    background: #1d4ed8;
+    color: #fff;
+}
+
+.btn--orange {
+    background: #ea580c;
+    color: #fff;
+}
+
+.btn--orange:hover,
+.btn--orange:focus-visible {
+    background: #c2410c;
+    color: #fff;
+}
+
+.btn--red,
+.mdl-button--accent {
+    background: #dc2626;
+    color: #fff;
+}
+
+.btn--red:hover,
+.btn--red:focus-visible,
+.mdl-button--accent:hover,
+.mdl-button--accent:focus-visible {
+    background: #b91c1c;
+    color: #fff;
+}
+
+.btn--slate {
+    background: #334155;
+    color: #fff;
+}
+
+.btn--slate:hover,
+.btn--slate:focus-visible {
+    background: #1e293b;
+    color: #fff;
+}
+
+.mdl-button--colored:hover,
+.mdl-button--accent:hover,
+.mdl-button--colored:focus-visible,
+.mdl-button--accent:focus-visible {
+    opacity: .96;
+}
+
+.mdl-button--icon {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mdl-button--icon .material-icons {
+    margin: 0 !important;
+}
+
+.button-inline,
+.mdl-button .material-icons:first-child {
+    margin-right: 8px;
+}
+
+.actions-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.actions-cell .mdl-button,
+.actions .mdl-button {
+    white-space: nowrap;
+}
+
+.hero-tile-link {
+    text-decoration: none;
+}
+
+.hero-tile-link:hover,
+.hero-tile-link:focus-visible {
+    color: inherit;
+}
+
+.hero-tile .mdl-button {
+    pointer-events: none;
+}
+
+.hero-tile-link:hover .mdl-button--raised,
+.hero-tile-link:focus-visible .mdl-button--raised {
+    transform: translateY(-1px);
 }
 
 .app-card__header {
@@ -283,9 +454,209 @@ body[data-page="form"] {
     gap: 18px;
 }
 
+.form-grid--proposal {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.form-field {
+    min-width: 0;
+}
+
+.form-field--full {
+    grid-column: span 12;
+}
+
+.form-field--half {
+    grid-column: span 6;
+}
+
+.form-field .mdl-textfield {
+    width: 100%;
+}
+
+.form-field .mdl-textfield__error {
+    display: block;
+    margin-top: 8px;
+}
+
+.form-field .mdl-textfield__label {
+    color: var(--app-muted);
+}
+
+.form-field .mdl-textfield__input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-field input.mdl-textfield__input,
+.form-field select.mdl-textfield__input {
+    min-height: 56px;
+    padding: 0 16px;
+    border: 1px solid rgba(15, 23, 42, 0.14);
+    border-radius: 16px;
+    background: #fff;
+    color: var(--app-text);
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.form-field textarea.mdl-textfield__input {
+    min-height: 140px;
+    padding: 16px;
+    border: 1px solid rgba(15, 23, 42, 0.14);
+    border-radius: 16px;
+    background: #fff;
+    color: var(--app-text);
+    resize: vertical;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.form-field input.mdl-textfield__input:focus,
+.form-field select.mdl-textfield__input:focus,
+.form-field textarea.mdl-textfield__input:focus {
+    border-color: rgba(63, 81, 181, 0.55);
+    box-shadow: 0 0 0 4px rgba(63, 81, 181, 0.12);
+    outline: none;
+}
+
+.form-field input.mdl-textfield__input:hover,
+.form-field select.mdl-textfield__input:hover,
+.form-field textarea.mdl-textfield__input:hover {
+    border-color: rgba(63, 81, 181, 0.32);
+}
+
+.form-field .mdl-textfield__input::placeholder {
+    color: rgba(71, 85, 105, 0.7);
+}
+
+.form-field .mdl-textfield.is-focused .mdl-textfield__input,
+.form-field .mdl-textfield.is-dirty .mdl-textfield__input {
+    background: #fff;
+}
+
+.form-field .mdl-textfield__label {
+    left: 16px;
+    top: 16px;
+}
+
+.form-field .mdl-textfield--floating-label.is-focused .mdl-textfield__label,
+.form-field .mdl-textfield--floating-label.is-dirty .mdl-textfield__label,
+.form-field .mdl-textfield--floating-label.has-placeholder .mdl-textfield__label {
+    top: 4px;
+}
+
+.form-field input[type="date"].mdl-textfield__input {
+    padding-right: 14px;
+}
+
+.form-field select.mdl-textfield__input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 40px;
+    background-image: linear-gradient(45deg, transparent 50%, var(--app-muted) 50%), linear-gradient(135deg, var(--app-muted) 50%, transparent 50%);
+    background-position: calc(100% - 18px) calc(50% - 2px), calc(100% - 12px) calc(50% - 2px);
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+}
+
+.form-field .mdl-textfield__input[type="file"] {
+    min-height: auto;
+    padding: 14px 16px;
+}
+
+.form-field .mdl-textfield--floating-label.is-focused .mdl-textfield__label,
+.form-field .mdl-textfield--floating-label.is-dirty .mdl-textfield__label,
+.form-field .mdl-textfield--floating-label.has-placeholder .mdl-textfield__label {
+    color: var(--app-primary);
+}
+
 .form-card {
-    max-width: 920px;
+    max-width: 980px;
     margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.form-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--app-primary) 0%, var(--app-accent) 100%);
+}
+
+.form-card__header {
+    padding: 28px 28px 0;
+    background: linear-gradient(180deg, rgba(63, 81, 181, 0.06), transparent 80%);
+}
+
+.form-card__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: rgba(63, 81, 181, 0.10);
+    color: var(--app-primary-dark);
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.form-card__title {
+    margin: 0;
+    font-size: clamp(1.35rem, 2.5vw, 2rem);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+}
+
+.form-card__subtitle {
+    margin: 10px 0 0;
+    color: var(--app-muted);
+    max-width: 70ch;
+    line-height: 1.6;
+}
+
+.form-section {
+    display: grid;
+    gap: 18px;
+}
+
+.form-section + .form-section {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--app-border);
+}
+
+.form-file-field {
+    padding: 18px;
+    border-radius: 18px;
+    background: rgba(248, 250, 252, 0.8);
+    border: 1px dashed rgba(63, 81, 181, 0.18);
+}
+
+.form-file-field input[type="file"] {
+    max-width: 100%;
+}
+
+.form-file-field input[type="file"]::file-selector-button {
+    margin-right: 12px;
+    border: 0;
+    border-radius: 999px;
+    padding: 10px 14px;
+    background: var(--app-primary);
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color .2s ease, transform .2s ease;
+}
+
+.form-file-field input[type="file"]::file-selector-button:hover {
+    background: var(--app-primary-dark);
+    transform: translateY(-1px);
 }
 
 .form-actions {
@@ -293,11 +664,13 @@ body[data-page="form"] {
     gap: 12px;
     flex-wrap: wrap;
     padding-top: 8px;
+    justify-content: flex-end;
+    grid-column: 1 / -1;
 }
 
 .field-hint {
     margin-top: 8px;
-    color: var(--app-muted);
+    color: var(--app-danger);
     font-size: .86rem;
     line-height: 1.5;
 }
@@ -349,11 +722,16 @@ body[data-page="form"] {
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
+    margin-top: 10px;
 }
 
 .file-name {
     color: var(--app-muted);
     font-size: .92rem;
+}
+
+body[data-page="form"] .app-card__body {
+    padding-top: 24px;
 }
 
 @media (max-width: 768px) {
@@ -375,5 +753,24 @@ body[data-page="form"] {
     .mdl-data-table td,
     .mdl-data-table th {
         padding: 14px 12px;
+    }
+
+    .form-card__header,
+    .app-card__body,
+    .hero-grid {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .form-field--half {
+        grid-column: span 12;
+    }
+
+    .form-actions {
+        justify-content: stretch;
+    }
+
+    .form-actions .mdl-button {
+        width: 100%;
     }
 }

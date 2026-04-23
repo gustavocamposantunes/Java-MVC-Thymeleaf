@@ -22,12 +22,17 @@
                 <h1 class="app-title" th:text="${modoEdicao} ? 'Editar curso' : 'Novo curso'">Novo curso</h1>
                 <p class="app-subtitle">Preencha os campos abaixo para cadastrar ou atualizar um curso.</p>
             </div>
-            <a th:href="@{/cursos}" class="mdl-button mdl-js-button mdl-button--icon" aria-label="Voltar">
+            <a th:href="@{/cursos}" class="mdl-button mdl-js-button mdl-button--icon btn--slate" aria-label="Voltar">
                 <i class="material-icons">arrow_back</i>
             </a>
         </div>
 
         <section class="app-card form-card">
+            <div class="form-card__header">
+                <div class="form-card__eyebrow">Cadastro de curso</div>
+                <h2 class="form-card__title" th:text="${modoEdicao} ? 'Ajuste as informações do curso' : 'Crie um novo curso'">Crie um novo curso</h2>
+                <p class="form-card__subtitle">Use um nome claro e uma descrição objetiva para facilitar a identificação do curso.</p>
+            </div>
             <div class="app-card__body">
                 <div th:if="${mensagemErro}" class="alert alert--danger" data-auto-dismiss>
                     <i class="material-icons">error</i>
@@ -39,27 +44,35 @@
                       method="post"
                       data-submit-loading>
 
-                    <div class="form-grid">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
-                            <input class="mdl-textfield__input" type="text" id="nome" th:field="*{nome}">
-                            <label class="mdl-textfield__label" for="nome">Nome</label>
-                            <span class="mdl-textfield__error" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
-                        </div>
+                    <div class="form-section">
+                        <div class="form-grid">
+                            <div class="form-field form-field--full">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text" id="nome" th:field="*{nome}">
+                                    <label class="mdl-textfield__label" for="nome">Nome</label>
+                                    <span class="mdl-textfield__error" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+                                </div>
+                            </div>
 
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
-                            <textarea class="mdl-textfield__input" id="descricao" rows="5" th:field="*{descricao}"></textarea>
-                            <label class="mdl-textfield__label" for="descricao">Descrição</label>
-                            <span class="mdl-textfield__error" th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></span>
-                        </div>
+                            <div class="form-field form-field--full">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <textarea class="mdl-textfield__input" id="descricao" rows="5" th:field="*{descricao}"></textarea>
+                                    <label class="mdl-textfield__label" for="descricao">Descrição</label>
+                                    <span class="mdl-textfield__error" th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></span>
+                                </div>
+                            </div>
 
-                        <div class="form-actions">
-                            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-                                <i class="material-icons" style="margin-right: 8px;">save</i>
-                                Salvar
-                            </button>
-                            <a th:href="@{/cursos}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                                Cancelar
-                            </a>
+                            <div class="form-field form-field--full">
+                                <div class="form-actions">
+                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect btn--blue">
+                                        <i class="material-icons" style="margin-right: 8px;">save</i>
+                                        Salvar
+                                    </button>
+                                    <a th:href="@{/cursos}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect btn--orange">
+                                        Cancelar
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
