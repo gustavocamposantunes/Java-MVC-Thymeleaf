@@ -4,41 +4,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Java MVC Thymeleaf</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e2e8f0 100%);
+        }
+
+        .page-wrap {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .hero-card {
+            width: 100%;
+            max-width: 980px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .hero-header {
+            background: #1f2937;
+            color: #fff;
+            padding: 40px 32px;
+            text-align: center;
+        }
+
+        .hero-header h1,
+        .hero-header p {
+            margin: 0;
+        }
+
+        .hero-header h1 {
+            margin-top: 8px;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .hero-header p {
+            color: rgba(255, 255, 255, 0.78);
+            margin-top: 12px;
+            font-size: 1rem;
+        }
+
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            padding: 28px;
+            background: #fff;
+        }
+
+        .module-card {
+            border-radius: 16px;
+            min-height: 190px;
+        }
+
+        .module-card .mdl-card__supporting-text {
+            width: auto;
+            color: rgba(0, 0, 0, 0.72);
+            font-size: 1rem;
+        }
+
+        .module-card .mdl-card__title-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .module-card .action-row {
+            margin-top: auto;
+            padding: 0 16px 16px;
+        }
+    </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center p-6">
-<div class="max-w-4xl w-full">
-    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-        <div class="px-8 py-10 bg-slate-900 text-white text-center">
-            <p class="text-sm uppercase tracking-[0.3em] text-slate-300 mb-3">Sistema acadêmico</p>
-            <h1 class="text-3xl md:text-4xl font-bold mb-3">Java MVC Thymeleaf</h1>
-            <p class="text-slate-300 max-w-2xl mx-auto">Selecione abaixo qual módulo deseja acessar.</p>
+<body>
+<div class="page-wrap">
+    <div class="mdl-card mdl-shadow--8dp hero-card">
+        <div class="hero-header">
+            <div class="mdl-typography--caption" style="letter-spacing: .25em; text-transform: uppercase;">Sistema acadêmico</div>
+            <h1>Java MVC Thymeleaf</h1>
+            <p>Selecione abaixo qual módulo deseja acessar.</p>
         </div>
 
-        <div class="grid gap-6 md:grid-cols-2 p-8">
-            <a th:href="@{/propostas}"
-               class="group rounded-xl border border-slate-200 p-6 hover:border-blue-500 hover:shadow-lg transition bg-slate-50">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-2xl font-bold text-slate-800">Propostas</h2>
-                    <span class="text-blue-600 text-3xl">↗</span>
+        <div class="module-grid">
+            <div class="mdl-card mdl-shadow--4dp module-card">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Propostas</h2>
                 </div>
-                <p class="text-slate-600 mb-6">Acesse o CRUD de propostas com anexos e status.</p>
-                <span class="inline-flex items-center rounded-lg bg-blue-600 group-hover:bg-blue-700 text-white px-4 py-2">
-                    Abrir propostas
-                </span>
-            </a>
+                <div class="mdl-card__supporting-text">
+                    Acesse o CRUD de propostas com anexos e status.
+                </div>
+                <div class="action-row">
+                    <a th:href="@{/propostas}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                        <i class="material-icons" style="margin-right: 8px;">description</i>
+                        Abrir propostas
+                    </a>
+                </div>
+            </div>
 
-            <a th:href="@{/cursos}"
-               class="group rounded-xl border border-slate-200 p-6 hover:border-emerald-500 hover:shadow-lg transition bg-slate-50">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-2xl font-bold text-slate-800">Cursos</h2>
-                    <span class="text-emerald-600 text-3xl">↗</span>
+            <div class="mdl-card mdl-shadow--4dp module-card">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Cursos</h2>
                 </div>
-                <p class="text-slate-600 mb-6">Acesse o CRUD de cursos com nome e descrição.</p>
-                <span class="inline-flex items-center rounded-lg bg-emerald-600 group-hover:bg-emerald-700 text-white px-4 py-2">
-                    Abrir cursos
-                </span>
-            </a>
+                <div class="mdl-card__supporting-text">
+                    Acesse o CRUD de cursos com nome e descrição.
+                </div>
+                <div class="action-row">
+                    <a th:href="@{/cursos}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                        <i class="material-icons" style="margin-right: 8px;">school</i>
+                        Abrir cursos
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
