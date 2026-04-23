@@ -3,15 +3,18 @@ package com.example.javamvcthymeleaf.controller.dto;
 import com.example.javamvcthymeleaf.model.Curso;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class CursoForm {
 
     private Integer idCurso;
 
     @NotBlank(message = "O nome é obrigatório")
+    @Size(max = 255, message = "O nome deve ter no máximo 255 caracteres")
     private String nome;
 
     @NotBlank(message = "A descrição é obrigatória")
+    @Size(max = 2000, message = "A descrição deve ter no máximo 2000 caracteres")
     private String descricao;
 
     public static CursoForm fromEntity(Curso curso) {

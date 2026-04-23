@@ -6,6 +6,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class PropostaForm {
@@ -13,12 +15,15 @@ public class PropostaForm {
     private Integer idProposta;
 
     @NotBlank(message = "O título é obrigatório")
+    @Size(max = 255, message = "O título deve ter no máximo 255 caracteres")
     private String titulo;
 
     @NotBlank(message = "A descrição é obrigatória")
+    @Size(max = 2000, message = "A descrição deve ter no máximo 2000 caracteres")
     private String descricao;
 
     @NotNull(message = "A data de submissão é obrigatória")
+    @PastOrPresent(message = "A data de submissão não pode ser futura")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataSubmissao;
 

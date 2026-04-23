@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
@@ -26,6 +27,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/propostas")
 public class PropostaController {
+
+    private static final long MAX_FILE_SIZE = 10 * 1024 * 1024;
 
     private static final List<String> STATUS_OPTIONS = Arrays.asList(
             "aprovado",
@@ -56,12 +59,15 @@ public class PropostaController {
     @PostMapping
     public String criar(@Valid @ModelAttribute("propostaForm") PropostaForm form,
                         BindingResult bindingResult,
-                        Model model) throws IOException {
+                        Model model,
+                        RedirectAttributes redirectAttributes) throws IOException {
         validarStatus(form, bindingResult);
+        validarAnexo(form, bindingResult);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("statusOptions", STATUS_OPTIONS);
             model.addAttribute("modoEdicao", false);
+            model.addAttribute("mensagemErro", "Corrija os campos destacados.");
             return "propostas/form";
         }
 
@@ -76,6 +82,7 @@ public class PropostaController {
         }
 
         propostaService.salvar(proposta);
+        redirectAttributes.addFlashAttribute("mensagemSucesso", "Proposta cadastrada com sucesso.");
         return "redirect:/propostas";
     }
 
@@ -94,16 +101,19 @@ public class PropostaController {
     public String atualizar(@PathVariable Integer id,
                             @Valid @ModelAttribute("propostaForm") PropostaForm form,
                             BindingResult bindingResult,
-                            Model model) throws IOException {
+                            Model model,
+                            RedirectAttributes redirectAttributes) throws IOException {
         Proposta proposta = propostaService.buscarPorId(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         validarStatus(form, bindingResult);
+        validarAnexo(form, bindingResult);
 
         if (bindingResult.hasErrors()) {
             form.setIdProposta(id);
             model.addAttribute("statusOptions", STATUS_OPTIONS);
             model.addAttribute("modoEdicao", true);
+            model.addAttribute("mensagemErro", "Corrija os campos destacados.");
             return "propostas/form";
         }
 
@@ -117,12 +127,20 @@ public class PropostaController {
         }
 
         propostaService.salvar(proposta);
+        redirectAttributes.addFlashAttribute("mensagemSucesso", "Proposta atualizada com sucesso.");
         return "redirect:/propostas";
     }
 
     @PostMapping("/{id}/excluir")
-    public String excluir(@PathVariable Integer id) {
+    public String excluir(@PathVariable Integer id,
+                          RedirectAttributes redirectAttributes) {
+        if (propostaService.buscarPorId(id).isEmpty()) {
+            redirectAttributes.addFlashAttribute("mensagemErro", "Proposta não encontrada para exclusão.");
+            return "redirect:/propostas";
+        }
+
         propostaService.excluir(id);
+        redirectAttributes.addFlashAttribute("mensagemSucesso", "Proposta excluída com sucesso.");
         return "redirect:/propostas";
     }
 
@@ -147,6 +165,12 @@ public class PropostaController {
     private void validarStatus(PropostaForm form, BindingResult bindingResult) {
         if (form.getStatus() != null && !STATUS_OPTIONS.contains(form.getStatus())) {
             bindingResult.rejectValue("status", "status.invalido", "Status inválido");
+        }
+    }
+
+    private void validarAnexo(PropostaForm form, BindingResult bindingResult) {
+        if (form.getAnexo() != null && !form.getAnexo().isEmpty() && form.getAnexo().getSize() > MAX_FILE_SIZE) {
+            bindingResult.rejectValue("anexo", "anexo.tamanho", "O anexo deve ter no máximo 10MB");
         }
     }
 }

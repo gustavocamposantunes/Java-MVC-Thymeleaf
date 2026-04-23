@@ -15,6 +15,9 @@
         </a>
     </div>
 
+    <div th:if="${mensagemSucesso}" class="mb-4 rounded-lg border border-green-200 bg-green-50 text-green-700 px-4 py-3" th:text="${mensagemSucesso}"></div>
+    <div th:if="${mensagemErro}" class="mb-4 rounded-lg border border-red-200 bg-red-50 text-red-700 px-4 py-3" th:text="${mensagemErro}"></div>
+
     <div class="bg-white rounded-xl shadow overflow-hidden">
         <table class="w-full">
             <thead class="bg-slate-50">
@@ -38,7 +41,7 @@
                 <td class="p-4">
                       <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold"
                           th:classappend="${proposta.status == 'aprovado'} ? ' bg-green-100 text-green-700' : (${proposta.status == 'aguardando aprovação'} ? ' bg-yellow-100 text-yellow-700' : ' bg-red-100 text-red-700')"
-                          th:text="${proposta.status == 'reijeitado' ? 'rejeitado' : proposta.status}">status</span>
+                          th:text="${proposta.status}">status</span>
                 </td>
                 <td class="p-4">
                     <a th:if="${proposta.anexos != null}" th:href="@{|/propostas/${proposta.idProposta}/anexo|}"
