@@ -18,6 +18,11 @@ O projeto foi preparado para funcionar com:
 
 Se nenhuma variável do banco for informada, o app usa H2 local automaticamente.
 
+### Seed inicial de dados
+- O projeto possui seeder automático para `cursos` e `propostas`.
+- O seed roda apenas quando as tabelas estão vazias.
+- Para desabilitar, defina: `APP_SEED_ENABLED=false`.
+
 ### Exemplo de configuração no Render
 ```bash
 POSTGRES_URL=postgresql://neondb_owner:SUA_SENHA@ep-billowing-smoke-aclsb5gc-pooler.sa-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
