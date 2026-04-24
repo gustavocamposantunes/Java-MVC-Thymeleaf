@@ -25,6 +25,12 @@
             <a th:href="@{/propostas}" class="mdl-button mdl-js-button mdl-button--icon btn--slate" aria-label="Voltar">
                 <i class="material-icons">arrow_back</i>
             </a>
+            <form th:action="@{/logout}" method="post" style="display: inline;">
+                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect btn--red">
+                    <i class="material-icons" style="margin-right: 8px;">logout</i>
+                    Sair
+                </button>
+            </form>
         </div>
 
         <section class="app-card form-card">

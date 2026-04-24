@@ -2,8 +2,10 @@ package com.example.javamvcthymeleaf.config;
 
 import com.example.javamvcthymeleaf.model.Curso;
 import com.example.javamvcthymeleaf.model.Proposta;
+import com.example.javamvcthymeleaf.model.Usuario;
 import com.example.javamvcthymeleaf.repository.CursoRepository;
 import com.example.javamvcthymeleaf.repository.PropostaRepository;
+import com.example.javamvcthymeleaf.repository.UsuarioRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
@@ -18,17 +20,35 @@ public class DatabaseSeeder implements CommandLineRunner {
 
     private final CursoRepository cursoRepository;
     private final PropostaRepository propostaRepository;
+    private final UsuarioRepository usuarioRepository;
 
-    public DatabaseSeeder(CursoRepository cursoRepository, PropostaRepository propostaRepository) {
+    public DatabaseSeeder(CursoRepository cursoRepository,
+                          PropostaRepository propostaRepository,
+                          UsuarioRepository usuarioRepository) {
         this.cursoRepository = cursoRepository;
         this.propostaRepository = propostaRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
     @Override
     @Transactional
     public void run(String... args) {
+        seedAdminUser();
         seedCursos();
         seedPropostas();
+    }
+
+    private void seedAdminUser() {
+        if (usuarioRepository.existsByUsername("admin")) {
+            return;
+        }
+
+        Usuario admin = new Usuario();
+        admin.setUsername("admin");
+        admin.setSenha("admin");
+        admin.setPerfil("ADMIN");
+
+        usuarioRepository.save(admin);
     }
 
     private void seedCursos() {

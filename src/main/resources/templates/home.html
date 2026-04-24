@@ -19,6 +19,14 @@
                     <i class="material-icons">dashboard</i>
                     Sistema acadêmico
                 </div>
+                <div class="actions" style="justify-content: flex-end; margin-bottom: 10px;">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect btn--red">
+                            <i class="material-icons" style="margin-right: 8px;">logout</i>
+                            Sair
+                        </button>
+                    </form>
+                </div>
                 <h1 class="app-title">Java MVC Thymeleaf</h1>
                 <p class="app-subtitle">Selecione abaixo qual módulo deseja acessar. A interface está otimizada com Material Design Lite, ícones e microinterações leves em JavaScript.</p>
             </div>

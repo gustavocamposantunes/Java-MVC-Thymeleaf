@@ -30,6 +30,12 @@
                 <i class="material-icons" style="margin-right: 8px;">add</i>
                 Novo curso
             </a>
+            <form th:action="@{/logout}" method="post" style="display: inline;">
+                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect btn--red">
+                    <i class="material-icons" style="margin-right: 8px;">logout</i>
+                    Sair
+                </button>
+            </form>
         </div>
     </div>
 
